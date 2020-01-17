@@ -5,7 +5,9 @@ var mongoose = require ('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var ejs = require('ejs');
 var app = express();
+app.set('view engine', 'ejs');
 const route= require('./route');
 var path = require('path');
 
@@ -44,10 +46,11 @@ mongoose.connection.on('error', (err)=>{
   app.get('/view_page', function (req, res, next) {
     if(req.session.page_views){
         req.session.page_views++;
-        res.send("You visited this page " + req.session.page_views + " times");
+       // res.send("You visited this page " + req.session.page_views + " times");
+        res.render('index',{number:req.session.page_views,title:'test'}); 
 		  setInterval(function(){
         console.log("setInterval: Hey! 1 millisecond completed!..");   
-        response.end("Finding the free memory using OS library in node:"+os.freemem());
+       // response.send("Finding the free memory using OS library in node:"+os.freemem());
 		},5000);
 		setTimeout(function(){
 		   console.log("Data printed after timeout");
@@ -57,6 +60,10 @@ mongoose.connection.on('error', (err)=>{
         res.send("Welcome to this page for the first time!");
      }
   })
+
+  app.get('/', function(req, res){ 
+    res.render('index',{user:"John Smith"}) 
+  }); 
   
 
 app.listen(port,()=>{
