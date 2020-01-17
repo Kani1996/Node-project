@@ -49,16 +49,20 @@ mongoose.connection.on('error', (err)=>{
        // res.send("You visited this page " + req.session.page_views + " times");
         res.render('index',{number:req.session.page_views,title:'test'}); 
 		  setInterval(function(){
-        console.log("setInterval: Hey! 1 millisecond completed!..");   
+       // console.log("setInterval: Hey! 1 millisecond completed!..");   
        // response.send("Finding the free memory using OS library in node:"+os.freemem());
 		},5000);
 		setTimeout(function(){
-		   console.log("Data printed after timeout");
+		  // console.log("Data printed after timeout");
 		},1000)
      } else {
         req.session.page_views = 1;
         res.send("Welcome to this page for the first time!");
      }
+  })
+
+  app.get('/login', function(req,res,next){
+    res.render('login');
   })
 
   app.get('/', function(req, res){ 

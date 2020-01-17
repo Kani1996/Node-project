@@ -12,6 +12,9 @@ const personSchema = mongoose.Schema({
       },
       emailId: {
           type : String
+      },
+      password: {
+          type : String
       }
 });
 const Person = module.exports = mongoose.model('person', personSchema);
